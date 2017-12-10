@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Dec  9 21:57:00 2017
+Created on Sun Dec 10 11:09:36 2017
 
 @author: gin
 """
@@ -12,33 +12,28 @@ import matplotlib.pyplot as plt
 x_data = [1., 2., 3.]
 y_data = [i*2 for i in x_data]
 
-w = 3.0 # any random value
-
-# our model forward pass
 def forward(x):
-    return x*w
+    return x * w
     
-# Loss function
 def loss(x, y):
-    y_pred = forward(x)
     return (y_pred - y)**2
 
-# compute gradient
-def gradient(x, y):
-    return 2 * x * (x * w - y)  # the derivative of loss.
+w_list = []
+mse_list = []
 
-# before training
-print("predict (before training)", 4, '\t', forward(4.))
-
-# Training loop
-for epoch in range(10):
-    for x, y in zip(x_data, y_data):
-        grad = gradient(x, y)
-        w = w - 0.1 * grad      # update w
-        print('\t\tgrad:', x, y, grad)
-        l = loss(x, y)
+for w in np.arange(0., 4.1, .1):
+    print('w=', w)
+    l_sum = 0
+    for x_val, y_val in zip(x_data, y_data):
+        y_pred = forward(x_val)
+        l = loss(x_val, y_val)
+        l_sum += l
+        print('\t', x_val, y_val, y_pred, l)
+    print('MSE=', l_sum/3)
+    w_list.append(w)
+    mse_list.append(l_sum/3)
     
-    print('progress:', epoch, l)
-
-# After training
-print('predict (after training)', 4, forward(4.))
+plt.plot(w_list, mse_list)
+plt.ylabel('Loss')
+plt.xlabel('W')
+plt.show()

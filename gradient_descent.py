@@ -6,8 +6,8 @@ Created on Sat Dec  9 21:57:00 2017
 @author: gin
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
+'''import numpy as np
+import matplotlib.pyplot as plt'''
 
 x_data = [1., 2., 3.]
 y_data = [i*2 for i in x_data]
