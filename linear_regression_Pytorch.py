@@ -58,8 +58,8 @@ for epoch in range(500):
     
     # Zero gradients, perform a backward pass, and update the weights.
     optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
+    loss.backward()     # transfer gradients backwards
+    optimizer.step()    # update the parameters through gradients
     
 hour_var = Variable(torch.Tensor([[4.]]))
 print('predict (after training)', 4, model.forward(hour_var).data[0][0])
