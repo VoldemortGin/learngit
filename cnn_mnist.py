@@ -7,7 +7,14 @@ Created on Thu Sep 21 19:03:02 2017
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data', one_hot = True)
 import tensorflow as tf
-import numpy as np
+
+import time
+
+#==============================================================================
+# import numpy as np
+#==============================================================================
+
+start = time.time()
 
 def weight_variable(shape):
     initial = tf.truncated_normal(shape, stddev=0.1)
@@ -91,7 +98,10 @@ for i in range(1200):
 print("test accuracy %g"%accuracy.eval(feed_dict={
     x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
-    
+end = time.time()
+total = end - start
+print("\t\t total time is: ")
+print(total)
 
 
 
